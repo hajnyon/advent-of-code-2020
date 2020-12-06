@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+        "lib": ["es6", "dom"],
+        "downlevelIteration": true,
+        "typeRoots": ["./node_modules/@types"]
+    }
+}
