@@ -2,21 +2,23 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 function solve(arrival: number, lines: string[]): number {
-    let earliest: number = Number.MAX_SAFE_INTEGER;
-    let id: number = -1;
-    for (const line of lines) {
-        if (line === 'x') {
+    let multiplier: number = parseInt(lines[0]);
+    let timestamp: number = 0;
+    for (let i = 1; i < lines.length; i++) {
+        if (lines[i] === 'x') {
             continue;
         }
-        const lineId: number = parseInt(line);
-        const diff = (Math.floor(arrival / lineId) + 1) * lineId - arrival;
-        if (diff < earliest) {
-            earliest = diff;
-            id = lineId;
+        const line = parseInt(lines[i]);
+        while (true) {
+            if ((timestamp + i) % line === 0) {
+                multiplier *= line;
+                break;
+            }
+            timestamp += multiplier;
         }
     }
 
-    return earliest * id;
+    return timestamp;
 }
 
 function main(): void {
